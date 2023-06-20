@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from typing import Final
 import re
 from re import Pattern
+from typing import Final
 
 DISCORD_API_BASE: Final[str] = "https://discord.com"
 DISCORD_API_AT_ME: Final[str] = f"{DISCORD_API_BASE}/api/v9/users/@me"
