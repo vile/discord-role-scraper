@@ -1,0 +1,19 @@
+| name                    |   position |                  id | administrator   | mention all   | manage guild   | manage roles   | manage channels   | webhooks   | tags    |
+|-------------------------|------------|---------------------|-----------------|---------------|----------------|----------------|-------------------|------------|---------|
+| Admin                   |         16 |  337696530112839711 | Yes             | No            | No             | No             | No                | No         |         |
+| VRChat Team             |         15 |  996491402970136610 | No              | No            | No             | No             | No                | No         |         |
+| VRC Team                |         14 |  337692363860344832 | No              | No            | No             | Yes            | No                | No         |         |
+| Community Team          |         13 |  378256373701410817 | No              | No            | No             | No             | No                | No         |         |
+| role that lets you ping |         12 | 1095427917074411632 | No              | Yes           | No             | No             | No                | No         |         |
+| VRCBot                  |         11 |  381313265508155392 | No              | No            | No             | No             | No                | No         | Bot     |
+| Dyno Premium            |         10 | 1004936011828183133 | Yes             | No            | Yes            | Yes            | Yes               | Yes        | Bot     |
+| Zira                    |          9 |  620767276043599916 | No              | No            | No             | Yes            | No                | No         | Bot     |
+| Chat Mod                |          8 |  385550615012573186 | No              | No            | No             | No             | No                | No         |         |
+| VRCat Bot               |          7 | 1015500312032858175 | Yes             | No            | No             | No             | No                | No         | Bot     |
+| Active Chat Mod         |          6 |  397642795457970181 | No              | No            | No             | No             | No                | No         |         |
+| terraform               |          5 |  968988473937784935 | No              | No            | No             | No             | No                | No         | Bot     |
+| Nitro Booster           |          4 |  585537948087484438 | No              | No            | No             | No             | No                | No         | Booster |
+| Muted                   |          3 |  546493057747648525 | No              | No            | No             | No             | No                | No         |         |
+| Open Beta               |          2 |  503009384968749076 | No              | No            | No             | No             | No                | No         |         |
+| StickyBot               |          1 | 1068236805876498543 | No              | Yes           | No             | No             | No                | Yes        | Bot     |
+| @everyone               |          0 |  189511567539306508 | No              | No            | No             | No             | No                | No         |         |
