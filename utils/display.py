@@ -20,7 +20,7 @@ def display_guild_roles(guild_roles: list) -> str:
         role_info: list = []
         for item, value in config.PERMISSIONS_TO_SCRAPE.items():
             # Non-permission flags
-            if type(value) == bool:
+            if type(value) == bool and value:
                 if item == "tags":
                     if "tags" in role:
                         match list(role["tags"].keys())[0]:
@@ -61,7 +61,9 @@ def display_guild_roles(guild_roles: list) -> str:
 
     tab_data = tabulate(
         table_data,
-        headers=list(config.PERMISSIONS_TO_SCRAPE.keys()),
+        headers=list(
+            key for key, value in config.PERMISSIONS_TO_SCRAPE.items() if value != False
+        ),
         tablefmt="github",
     )
     return tab_data
