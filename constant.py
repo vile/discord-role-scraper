@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import re
 from re import Pattern
 from typing import Final
