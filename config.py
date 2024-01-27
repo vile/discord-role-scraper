@@ -26,7 +26,7 @@ GUILD_INFO_TO_SCRAPE: Final[list[bool]] = {
 }
 
 SCRAPE_PERMISSION_INFO: Final[bool] = True
-PERMISSIONS_TO_SCRAPE: Final[dict[bool | int]] = {
+PERMISSIONS_TO_SCRAPE: Final[dict] = {
     "name": True,
     "position": True,
     "id": True,
