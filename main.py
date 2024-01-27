@@ -1,4 +1,3 @@
-import os
 import string
 import time
 
@@ -8,9 +7,8 @@ from requests import Response
 from tabulate import tabulate
 
 import config
-import constant
-
-clear = lambda: os.system("cls") if os.name == "nt" else os.system("clear")
+import utils.constant as constant
+from utils.misc import clear
 
 
 def check_token_is_valid(token: str) -> bool:
