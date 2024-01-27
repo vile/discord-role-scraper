@@ -92,7 +92,7 @@ pip install -r requirements.txt
 
 #### Start the script
 
-In your terminal (CMD, Powershell, etc.), type the following command(s):****
+In your terminal (CMD, Powershell, etc.), type the following command(s):
 
 ```bash
 python main.py
