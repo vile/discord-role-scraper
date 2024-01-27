@@ -186,5 +186,5 @@ I am not responsible if you spam the API scraping servers and get your account t
 
 ### Can you help me with ...?
 
-No, I will not help you with this script (follow the [Linux](#usage-linux) and [Windows](#usage-windows) setions above).
+No, I will not help you with this script (follow the [Linux](#usage-linux) and [Windows](#usage-windows) sections above).
 No, I will not make you any scripts.
