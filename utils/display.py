@@ -13,9 +13,9 @@ def display_guild_info(guild_info: dict) -> None:
 
 
 def display_guild_roles(guild_roles: list) -> str:
-    # print(guild_roles)
     roles: list = sorted(guild_roles, key=lambda role: role["position"], reverse=True)
     table_data: list = []
+
     for role in roles:
         role_info: list = []
         for item, value in config.PERMISSIONS_TO_SCRAPE.items():
@@ -49,7 +49,7 @@ def display_guild_roles(guild_roles: list) -> str:
                     "".join(filter(lambda x: x in string.printable, str(role[item])))
                 )
 
-            # Permission flags and calculation
+            # Permission flags and bitwise calculation
             if type(value) == int:
                 role_info.append(
                     f"{Fore.GREEN}Yes{Fore.RESET}"
@@ -58,6 +58,7 @@ def display_guild_roles(guild_roles: list) -> str:
                 )
 
         table_data.append(role_info)
+
     tab_data = tabulate(
         table_data,
         headers=list(config.PERMISSIONS_TO_SCRAPE.keys()),
