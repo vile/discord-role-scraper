@@ -1,4 +1,4 @@
-.PHONY: all deps start clean remove-exports remove-env 
+.PHONY: all deps start clean remove-exports remove-env remove-pycache
 
 all: deps start
 
