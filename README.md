@@ -10,10 +10,18 @@ A simple Python script used to scrape Discord guild info and roles.
 
 1. Git - [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
    1. Check if you have Git installed with `git --version`
-2. Python (>=3.11) - [Install Python (Windows)](https://www.python.org/downloads/windows/), [Install Python (Linux)](https://docs.python.org/3/using/unix.html)
+2. Python (>=3.11) - [Install Python (Windows)](https://www.python.org/downloads/windows/), [Install Python (Linux)](https://docs.python.org/3/using/unix.html) (see [pyenv](https://github.com/pyenv/pyenv))
    1. Check if you have Python installed with `python3 --version`
 3. Pip - [Install Pip](https://pip.pypa.io/en/stable/installation/)
    1. Check if you have Pip installed with `pip --version`
+4. Poetry - [Install Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) (preferrably with [pipx](https://github.com/pypa/pipx))
+   1. Check if you have Poetry installed with `poetry --version`
+
+### Additional Requirements
+
+1. PyInstaller - [Install PyInstaller](https://pyinstaller.org/en/stable/) (preferrably with [pipx](https://github.com/pypa/pipx))
+   1.  Check if you have Poetry installed with `pyinstaller --version`
+   2.  PyInstaller is platform dependent, if you want to build .exe files, you must build on Windows
 
 ## Usage (Linux)
 
