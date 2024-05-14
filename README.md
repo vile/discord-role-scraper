@@ -10,38 +10,19 @@ A simple Python script used to scrape Discord guild info and roles.
 
 1. Git - [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
    1. Check if you have Git installed with `git --version`
-2. Python (>=3) - [Install Python (Windows)](https://www.python.org/downloads/windows/), [Install Python (Linux)](https://docs.python.org/3/using/unix.html)
+2. Python (>=3.11) - [Install Python (Windows)](https://www.python.org/downloads/windows/), [Install Python (Linux)](https://docs.python.org/3/using/unix.html)
    1. Check if you have Python installed with `python3 --version`
 3. Pip - [Install Pip](https://pip.pypa.io/en/stable/installation/)
    1. Check if you have Pip installed with `pip --version`
 
 ## Usage (Linux)
 
-### Installing
-
-#### Clone this repo
+### Quick Start
 
 ```bash
 git clone https://github.com/vile/discord-role-scraper.git
 cd discord-role-scraper
-```
-
-#### Create venv
-
-```bash
-make venv
-```
-
-#### Install dependencies
-
-```bash
-make deps
-```
-
-#### Start the script
-
-```bash
-make start
+make
 ```
 
 ### Interacting with the script
@@ -50,53 +31,7 @@ After starting the script, follow the prompts given to input your token and serv
 
 ## Usage (Windows)
 
-### Installing
-
-#### Clone this repo (Git)
-
-```bash
-git clone https://github.com/vile/discord-role-scraper.git
-cd discord-role-scraper
-```
-
-#### Clone this repo (HTTPS)
-
-1. At the top right of the repo on GitHub, click the green `Code` button, then under `HTTPS` click `Download ZIP`.
-2. Extract the downloaded archive to a folder like your Desktop using any ZIP tool (such as [WinRAR](https://www.win-rar.com/start.html?&L=0), [7Zip](https://www.7-zip.org/), or [NanaZip](https://github.com/M2Team/NanaZip))
-3. Navigate to the extracted folder (usually called `discord-role-scraper-2`)
-
-<details>
-<summary>Download repo via HTTPS</summary>
-<br>
-
-![Download repo via HTTPS](./images/1-download-zip-via-https.jpg)
-
-</details>
-
-#### Create venv
-
-In your terminal (CMD, Powershell, etc.), type the following command(s):
-
-```bash
-python -m venv .venv
-.\.venv\Scripts\activate
-```
-
-#### Install dependencies
-
-In your terminal (CMD, Powershell, etc.), type the following command(s):
-
-```bash
-pip install -r requirements.txt
-```
-
-#### Start the script
-
-In your terminal (CMD, Powershell, etc.), type the following command(s):
-
-```bash
-python main.py
-```
+TODO (Download via HTTPS for now).
 
 ### Interacting with the script
 
@@ -104,21 +39,26 @@ After starting the script, follow the prompts given to input your token and serv
 
 ## Editing config.py
 
-The `config.py` file contains all of the editable settings for this script.
+The `config.toml` file contains all of the editable settings for this script. Any value under the `permissions_to_scrape` section that starts with `0x` should be commented out instead of having its value changed.
 
 ### Export Results
+
+<details>
 
 | Name           | type   | Default Value | Description                                   |
 | -------------- | ------ | ------------- | --------------------------------------------- |
 | EXPORT_RESULTS | `bool` | `True`        | Whether or not to export txt files of scrapes |
 
+</details>
+
 ### Scrape Guild Info
+
+<details>
 
 | Name              | type   | Default Value | Description                               |
 | ----------------- | ------ | ------------- | ----------------------------------------- |
 | SCRAPE_GUILD_INFO | `bool` | `True`        | Whether or not to scrape the guild's info |
 
-`GUILD_INFO_TO_SCRAPE` is a `dict` of `bool`s.
 
 | Name                 | Default Value |
 | -------------------- | ------------- |
@@ -142,13 +82,16 @@ The `config.py` file contains all of the editable settings for this script.
 | widget_channel_id    | `False`       |
 | verification_level   | `True`        |
 
+</details>
+
 ### Scrape Permission Info
+
+<details>
 
 | Name                   | type   | Default Value | Description                                                                             |
 | ---------------------- | ------ | ------------- | --------------------------------------------------------------------------------------- |
 | SCRAPE_PERMISSION_INFO | `bool` | `True`        | Whether or not to scrape the guild's roles and associated permissions and/or properties |
 
-`PERMISSIONS_TO_SCRAPE` is a `dict` of `bool`s and bitwise (hex) flags.
 All values starting with `0x` **can not be changed**, if you wish to not see (disable) a specific permission in your scrapes, comment the line (using a `#`). Changing any of the `0x` values will break calculations associated with checking permissions.
 
 | Name             | Type    | Default Value |
@@ -170,6 +113,8 @@ All values starting with `0x` **can not be changed**, if you wish to not see (di
 | app commands     | bitwise |
 | tags             | `bool`  | `True`        |
 
+</details>
+
 ## FAQ
 
 ### Is my token safe?
@@ -183,6 +128,7 @@ Your token is never saved on your computer, and is only ever sent to the officia
 You're interacting with normally available API endpoints for user accounts in a normal way.
 However, Discord doesn't like when you script or automate any type of action, therefore there is always a risk of account termination.
 I am not responsible if you spam the API scraping servers and get your account terminated.
+It is recommended to use a brand new or alt account.
 
 ### Can you help me with ...?
 
