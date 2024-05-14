@@ -1,12 +1,12 @@
-import requests
-from requests import Response
+import httpx
+from httpx import Response
 
 import utils.constant as constant
 
 
 def check_token_is_valid(token: str) -> bool:
     headers: dict = {"Authorization": token}
-    r: Response = requests.get(
+    r: Response = httpx.get(
         constant.DISCORD_API_AT_ME,
         headers=headers,
     )
@@ -16,6 +16,6 @@ def check_token_is_valid(token: str) -> bool:
 
 
 def get_cookies() -> dict:
-    r: Response = requests.get(constant.DISCORD_API_BASE)
+    r: Response = httpx.get(constant.DISCORD_API_BASE)
     cookies: dict = r.cookies.get_dict()
     return cookies

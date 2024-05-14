@@ -1,5 +1,5 @@
-import requests
-from requests import Response
+import httpx
+from httpx import Response
 
 import utils.account as account
 import utils.constant as constant
@@ -17,7 +17,7 @@ def scrape_guild_info(token: str, server_id: int) -> dict:
     cookies: dict = account.get_cookies()
 
     try:
-        r = requests.get(
+        r: Response = httpx.get(
             f"{constant.DISCORD_API_GUILD}/{server_id}",
             headers=headers,
             cookies=cookies,
@@ -36,7 +36,7 @@ def scrape_guild_roles(token: str, server_id: int) -> list:
     cookies: dict = account.get_cookies()
 
     try:
-        r: Response = requests.get(
+        r: Response = httpx.get(
             f"{constant.DISCORD_API_GUILD}/{server_id}/roles",
             headers=headers,
             cookies=cookies,
