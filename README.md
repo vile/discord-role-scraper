@@ -37,7 +37,7 @@ TODO (Download via HTTPS for now).
 
 After starting the script, follow the prompts given to input your token and server ID.
 
-## Editing config.py
+## Editing config.toml
 
 The `config.toml` file contains all of the editable settings for this script. Any value under the `permissions_to_scrape` section that starts with `0x` should be commented out instead of having its value changed.
 
