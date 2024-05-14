@@ -1,5 +1,5 @@
 import httpx
-from httpx import Response
+from httpx import Response, Cookies
 
 import utils.constant as constant
 
@@ -15,7 +15,7 @@ def check_token_is_valid(token: str) -> bool:
     return False
 
 
-def get_cookies() -> dict:
+def get_cookies() -> Cookies:
     r: Response = httpx.get(constant.DISCORD_API_BASE)
-    cookies: dict = r.cookies.get_dict()
+    cookies: Cookies = r.cookies
     return cookies
