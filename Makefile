@@ -1,4 +1,4 @@
-.PHONY: all deps start clean remove-exports remove-env remove-pycache
+.PHONY: all deps start clean remove-exports remove-env remove-pycache sudo-act
 
 all: deps start
 
@@ -19,3 +19,10 @@ remove-venv :; rm -rf .venv
 # Will remove pycache files under .venv/ as well
 # Slightly modified to work with Make ($ -> $$)
 remove-pycache :; find . -regex '^.*\(__pycache__\|\.py[co]\)$$' -delete
+
+### Local Act Workflows
+
+# Example usage: `make sudo-act ACTION=push`
+# Depending on your Docker installation, sometimes Act 
+# doesnt have permission to interact with your docker daemon
+sudo-act :; sudo env "PATH=$$PATH" act $(ACTION)
