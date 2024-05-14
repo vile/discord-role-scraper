@@ -1,0 +1,42 @@
+export_results = true
+scrape_guild_info = true
+scrape_permission_info = true
+
+[guild_info_to_scrape]
+id = true
+name = true
+icon = false
+description = true
+home_header = false
+splash = false
+discovery_splash = false
+features = false
+banner = false
+owner_id = true
+application_id = false
+region = true
+afk_channel_id = false
+afk_timeout = false
+system_channel_id = false
+system_channel_flags = false
+widget_enabled = false
+widget_channel_id = false
+verification_level = true
+
+[permissions_to_scrape]
+name = true
+position = true
+id = true
+mentionable = true
+administrator = 0x0000000000000008
+'mention all' = 0x0000000000020000
+'manage guild' = 0x0000000000000020
+'manage roles' = 0x0000000010000000
+'manage channels' = 0x0000000000000010
+# 'manage events' = 0x0000000200000000
+# 'manage nicknames' = 0x0000000008000000
+'kick members' = 0x0000000000000002
+'ban members' = 0x0000000000000004
+webhooks = 0x0000000020000000
+# 'app commands' = 0x0000000080000000
+tags = true

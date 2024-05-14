@@ -3,22 +3,23 @@ import string
 from colorama import Fore
 from tabulate import tabulate
 
-import config
 
-
-def display_guild_info(guild_info: dict) -> None:
+def display_guild_info(guild_info: dict, config: dict) -> None:
     for item, value in guild_info.items():
-        if item in config.GUILD_INFO_TO_SCRAPE and config.GUILD_INFO_TO_SCRAPE[item]:
+        if (
+            item in config["guild_info_to_scrape"]
+            and config["guild_info_to_scrape"][item]
+        ):
             print(f"{Fore.GREEN}{item}{Fore.RESET}: {value}")
 
 
-def display_guild_roles(guild_roles: list) -> str:
+def display_guild_roles(guild_roles: list, config: dict) -> str:
     roles: list = sorted(guild_roles, key=lambda role: role["position"], reverse=True)
     table_data: list = []
 
     for role in roles:
         role_info: list = []
-        for item, value in config.PERMISSIONS_TO_SCRAPE.items():
+        for item, value in config["permissions_to_scrape"].items():
             # Non-permission flags
             if type(value) == bool and value:
                 if item == "tags":
@@ -62,7 +63,9 @@ def display_guild_roles(guild_roles: list) -> str:
     tab_data = tabulate(
         table_data,
         headers=list(
-            key for key, value in config.PERMISSIONS_TO_SCRAPE.items() if value != False
+            key
+            for key, value in config["permissions_to_scrape"].items()
+            if value != False
         ),
         tablefmt="github",
     )
