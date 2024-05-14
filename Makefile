@@ -1,10 +1,9 @@
-venv :
-	python3 -m venv .venv
+.PHONY: all deps start
+
+all: deps start
 
 deps :
-	$(VENV)/pip install -r requirements.txt 
+	poetry config virtualenvs.in-project true
+	poetry install --no-root
 
-start :
-	$(VENV)/python3 main.py
-
-include Makefile.venv
+start :; poetry run python3 main.py
