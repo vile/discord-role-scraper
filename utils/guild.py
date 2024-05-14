@@ -1,5 +1,5 @@
 import httpx
-from httpx import Response
+from httpx import Cookies, Response
 
 import utils.account as account
 import utils.constant as constant
@@ -12,9 +12,9 @@ def check_server_id_is_valid(server_id: int) -> bool:
 
 
 def scrape_guild_info(token: str, server_id: int) -> dict:
-    headers: dict = constant.REQUEST_HEADERS.copy()
+    headers: Cookies = constant.REQUEST_HEADERS.copy()
     headers["Authorization"] = token
-    cookies: dict = account.get_cookies()
+    cookies: Cookies = account.get_cookies()
 
     try:
         r: Response = httpx.get(
@@ -33,7 +33,7 @@ def scrape_guild_info(token: str, server_id: int) -> dict:
 def scrape_guild_roles(token: str, server_id: int) -> list:
     headers: dict = constant.REQUEST_HEADERS.copy()
     headers["Authorization"] = token
-    cookies: dict = account.get_cookies()
+    cookies: Cookies = account.get_cookies()
 
     try:
         r: Response = httpx.get(
