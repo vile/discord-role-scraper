@@ -1,0 +1,32 @@
+name: Build Windows Release with PyInstaller
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build Windows Release
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5 
+        with: 
+          python-version: '3.11.0'
+
+      - name: Install PyInstaller
+        run: pip install -U pyinstaller
+
+      - name: Build with PyInstaller
+        run: pyinstaller main.py --onefile --name DiscordRoleScraper
+
+      - name: Create Release with Build
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/DiscordRoleScraper.exe
+            config.toml
