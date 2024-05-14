@@ -2,6 +2,7 @@ import re
 from re import Pattern
 from typing import Final
 
+# fmt: off
 DISCORD_API_VERSION: Final[str] = "v9"
 DISCORD_API_BASE: Final[str] = "https://discord.com"
 DISCORD_API_AT_ME: Final[str] = f"{DISCORD_API_BASE}/api/{DISCORD_API_VERSION}/users/@me"
