@@ -1,8 +1,18 @@
-[project]
+[tool.poetry]
 name = "discord-role-scraper"
-version = "3.0.0"
+version = "0.2.1"
 description = "A simple Python script used to scrape Discord guild info and roles."
-readme = "README.md"
+authors = ["Vile <111662603+vile@users.noreply.github.com>"]
 license = "MIT"
-requires-python = ">=3"
-dependencies = ["requests==2.31.0", "colorama==0.4.6", "tabulate==0.9.0"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+httpx = "^0.27.0"
+colorama = "^0.4.6"
+tabulate = "^0.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
