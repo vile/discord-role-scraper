@@ -1,5 +1,5 @@
 import httpx
-from httpx import Response, Cookies
+from httpx import Cookies, Response
 
 import utils.constant as constant
 
