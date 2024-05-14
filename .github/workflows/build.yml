@@ -24,6 +24,9 @@ jobs:
       - name: Install PyInstaller
         run: pip install -U pyinstaller
 
+      - name: Install Script Dependencies
+        run: pip install -r requirements.txt
+
       - name: Build with PyInstaller
         run: pyinstaller main.py --onefile --name DiscordRoleScraper
 
