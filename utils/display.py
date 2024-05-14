@@ -21,7 +21,7 @@ def display_guild_roles(guild_roles: list, config: dict) -> str:
         role_info: list = []
         for item, value in config["permissions_to_scrape"].items():
             # Non-permission flags
-            if type(value) == bool and value:
+            if type(value) is bool and value:
                 if item == "tags":
                     if "tags" in role:
                         match list(role["tags"].keys())[0]:
@@ -51,7 +51,7 @@ def display_guild_roles(guild_roles: list, config: dict) -> str:
                 )
 
             # Permission flags and bitwise calculation
-            if type(value) == int:
+            if type(value) is int:
                 role_info.append(
                     f"{Fore.GREEN}Yes{Fore.RESET}"
                     if int(role["permissions"]) & value != 0
@@ -63,9 +63,7 @@ def display_guild_roles(guild_roles: list, config: dict) -> str:
     tab_data = tabulate(
         table_data,
         headers=list(
-            key
-            for key, value in config["permissions_to_scrape"].items()
-            if value != False
+            key for key, value in config["permissions_to_scrape"].items() if value
         ),
         tablefmt="github",
     )
