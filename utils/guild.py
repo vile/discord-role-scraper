@@ -12,7 +12,7 @@ def check_server_id_is_valid(server_id: int) -> bool:
 
 
 def scrape_guild_info(token: str, server_id: int) -> dict:
-    headers: Cookies = constant.REQUEST_HEADERS.copy()
+    headers: dict = constant.REQUEST_HEADERS.copy()
     headers["Authorization"] = token
     cookies: Cookies = account.get_cookies()
 
