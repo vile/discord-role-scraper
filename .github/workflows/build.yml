@@ -49,7 +49,9 @@ jobs:
           name: windows-release
 
       - name: Zip Files
-        run: zip -r windows-release.zip DiscordRoleScraper.exe config.toml
+        run: |
+          mv dist/DiscordRoleScraper.exe . 
+          zip -r windows-release.zip DiscordRoleScraper.exe config.toml
 
       - name: Create Release with Zipped Build
         uses: softprops/action-gh-release@v2
