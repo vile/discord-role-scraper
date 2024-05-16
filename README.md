@@ -41,7 +41,8 @@ After starting the script, follow the prompts given to input your token and serv
 
 ### Quick Start (exe)
 
-Download the latest `DiscordRoleScraper.exe` and `config.toml` file from the [releases tab](https://github.com/vile/discord-role-scraper/releases).
+Download the latest `windows-release.zip` file from the [releases tab](https://github.com/vile/discord-role-scraper/releases).
+Then, unzip with your choice of zip tool (WinRAR, 7zip, NanaZip, etc.), and double click `DiscordRoleScraper.exe`.
 
 ### Interacting with the script
 
