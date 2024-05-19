@@ -44,6 +44,42 @@ After starting the script, follow the prompts given to input your token and serv
 Download the latest `windows-release.zip` file from the [releases tab](https://github.com/vile/discord-role-scraper/releases).
 Then, unzip with your choice of zip tool (WinRAR, 7zip, NanaZip, etc.), and double click `DiscordRoleScraper.exe`.
 
+### Running with Python
+
+Download the latest version of this repo via HTTPS or clone with git:
+
+<details>
+<summary>Download via HTTPS</summary>
+</br>
+
+<img><img src="./images/1-download-zip-via-https.jpg">
+
+</details>
+</br>
+
+**Or clone:**
+
+```bash
+git clone https://github.com/vile/discord-role-scraper.git
+cd discord-role-scraper
+```
+
+Then, run the script with Python in CMD/Powershell/Terminal:
+
+```bash
+python3 main.py
+```
+
+### Build Exe from Source Script
+
+Ensure you have [PyInstaller]((https://pyinstaller.org/en/stable/)) installed (see [addtional requirements](#additional-requirements)), then build:
+
+```bash
+pyinstaller main.py --onefile --name DiscordRoleScraper
+```
+
+The exe file will end up in a new folder called `dist/`, move the file into the root directory of the project (where config.toml is).
+
 ### Interacting with the script
 
 After starting the script, follow the prompts given to input your token and server ID.
