@@ -9,6 +9,7 @@ deps :
 start :; poetry run python3 main.py
 
 ### Clean
+
 clean: remove-exports remove-venv remove-pycache
 
 remove-exports :; rm -rf export/*
@@ -22,7 +23,9 @@ remove-pycache :; find . -regex '^.*\(__pycache__\|\.py[co]\)$$' -delete
 
 ### Local Act Workflows
 
-# Example usage: `make sudo-act ACTION=push`
+# Example usage: 
+# 	- make sudo-act ACTION=push
+# 	- make sudo-act ACTION=push FLAGS="--secret-file workflow.secrets"
 # Depending on your Docker installation, sometimes Act 
 # doesnt have permission to interact with your docker daemon
-sudo-act :; sudo env "PATH=$$PATH" act $(ACTION)
+sudo-act :; sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS)
