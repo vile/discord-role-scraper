@@ -3,7 +3,7 @@ name: Build Windows Release with PyInstaller
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
