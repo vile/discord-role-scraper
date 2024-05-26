@@ -1,0 +1,35 @@
+name: Dirty Script Test
+
+on:
+  push:
+    paths:
+      - '**.py'
+
+jobs:
+  test:
+    name: Dirty Script Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5 
+        with: 
+          python-version: '3.11.0'
+
+      - name: Install Script Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Disable File Exports
+        run: |
+          sudo chmod +x .github/change_config_export.sh
+          sudo .github/change_config_export.sh false
+
+      - name: Test Script Runs with CLI Args
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+        timeout-minutes: 2
+        run: | 
+          python3 main.py "$DISCORD_TOKEN" "$DISCORD_SERVER_ID" true
