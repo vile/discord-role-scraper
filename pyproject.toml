@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "discord-role-scraper"
-version = "0.2.1"
+version = "0.2.2"
 description = "A simple Python script used to scrape Discord guild info and roles."
 authors = ["Vile <111662603+vile@users.noreply.github.com>"]
 license = "MIT"

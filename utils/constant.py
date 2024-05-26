@@ -8,7 +8,7 @@ DISCORD_API_BASE: Final[str] = "https://discord.com"
 DISCORD_API_AT_ME: Final[str] = f"{DISCORD_API_BASE}/api/{DISCORD_API_VERSION}/users/@me"
 DISCORD_API_GUILD: Final[str] = f"{DISCORD_API_BASE}/api/{DISCORD_API_VERSION}/guilds"
 
-VERSION_NUMBER: Final[str] = "0.2.1"
+VERSION_NUMBER: Final[str] = "0.2.2"
 SCRIPT_AUTHOR: Final[str] = "https://github.com/Vile"
 
 REQUEST_HEADERS: Final[dict] = {
