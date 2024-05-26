@@ -1,4 +1,5 @@
-from typing import Callable
+import sys
+from typing import Callable, Union
 
 import tomli
 from colorama import Fore
@@ -8,12 +9,12 @@ import utils.constant as constant
 import utils.display as display
 import utils.export as export
 import utils.guild as guild
-from utils.misc import clear
 
 
 def main() -> None:
     config: dict = load_config()
-    scraper()(config)
+    args: dict[str, str] = parse_argv()
+    scraper(args)(config)
 
 
 def load_config() -> dict:
@@ -23,25 +24,63 @@ def load_config() -> dict:
     return config
 
 
-def scraper() -> Callable[[dict], None]:
+def parse_argv() -> dict[str, Union[str, int]]:
+    """
+    argv[0] = main.py (file name)
+    argv[1] = token
+    argv[2] = server id (optional)
+    argv[3] = single run (optional)
+    """
+
+    if len(sys.argv) == 1:
+        return {}
+
+    return {
+        "token": sys.argv[1],
+        "server_id": int(sys.argv[2]) if len(sys.argv) >= 3 else 0,
+        "single_run": bool(sys.argv[3]) if len(sys.argv) >= 4 else False,
+    }
+
+
+def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
     token: str = ""
+    server_id: int = 0
+    single_run: bool = False
+
+    if "token" in args and account.check_token_is_valid(args["token"]):
+        token = args["token"]
+
+    if "server_id" in args and guild.check_server_id_is_valid(args["server_id"]):
+        server_id = args["server_id"]
+
+    if "single_run" in args:
+        single_run = args["single_run"]
 
     def run(config: dict) -> None:
-        clear()
         print(f"{Fore.RED}Discord Role Scraper v{constant.VERSION_NUMBER} | {constant.SCRIPT_AUTHOR}{Fore.RESET}\n")  # fmt: skip
 
         nonlocal token
+        nonlocal server_id
+        nonlocal single_run
 
         while True:
             if token == "":
                 token = input(f"{Fore.RED}Token: {Fore.RESET}").strip("'\"")
-                if not account.check_token_is_valid(token):
-                    print(f"{Fore.RED}[!] Your token seems to be invalid, make sure you are copying your FULL token without changing it and that your account is not terminated or locked{Fore.RESET}")  # fmt: skip
-                    continue
+            if not account.check_token_is_valid(token):
+                print(f"{Fore.RED}[!] Your token seems to be invalid, make sure you are copying your FULL token without changing it and that your account is not terminated or locked{Fore.RESET}")  # fmt: skip
+                continue
 
-            server_id: int = input(f"{Fore.RED}Server ID: {Fore.RESET}")
+            if server_id == 0:
+                server_id = (
+                    int(_input)
+                    if (
+                        _input := input(f"{Fore.RED}Server ID: {Fore.RESET}")
+                    ).isnumeric()
+                    else 0
+                )
             if not guild.check_server_id_is_valid(server_id):
                 print(f"{Fore.RED}[!] Your server ID seems to be invalid, make sure you are copying the FULL numerical server ID without changing it{Fore.RESET}")  # fmt: skip
+                server_id = 0
                 continue
             break
 
@@ -60,9 +99,11 @@ def scraper() -> Callable[[dict], None]:
             if config["export_results"]:
                 export.export_scrape_to_file(guild_formatted, server_id)
 
-        scrape_again: str = input(f"{Fore.YELLOW}[?] Scrape another server? (y/n): {Fore.RESET}").lower()  # fmt: skip
-        if "y" in scrape_again:
-            run(config)
+        if not single_run:
+            scrape_again: str = input(f"{Fore.YELLOW}[?] Scrape another server? (y/n): {Fore.RESET}").lower()  # fmt: skip
+            if "y" in scrape_again:
+                server_id = 0
+                run(config)
 
     return run
 
