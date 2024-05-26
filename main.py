@@ -47,7 +47,10 @@ def scraper() -> Callable[[dict], None]:
 
         if config["scrape_permission_info"]:
             guild_info: dict = guild.scrape_guild_info(token, server_id)
-            display.display_guild_info(guild_info, config)
+            if "error" in guild_info:
+                print(f"{Fore.RED}[!] There was an error getting guild info: {guild_info['error']}{Fore.RESET}")  # fmt: skip
+            else:
+                display.display_guild_info(guild_info, config)
 
         if config["scrape_permission_info"]:
             guild_roles: list = guild.scrape_guild_roles(token, server_id)

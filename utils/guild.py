@@ -23,11 +23,18 @@ def scrape_guild_info(token: str, server_id: int) -> dict:
             cookies=cookies,
         )
 
-        if r.status_code == 200:
-            return r.json()
-        raise Exception(f"Bad HTTP code when scraping guild info, {r.status_code}")
+        json: dict = r.json()
+
+        if r.status_code != 200:
+            raise Exception(f"Bad HTTP code when scraping guild info, {r.status_code}")
+
+        if "unavailable" in json and json["unavailable"]:
+            raise Exception("Guild is unavailable")
+
     except Exception as error:
         return {"error": error}
+
+    return json
 
 
 def scrape_guild_roles(token: str, server_id: int) -> list:
