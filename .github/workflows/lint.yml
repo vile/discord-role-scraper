@@ -25,3 +25,9 @@ jobs:
 
       - name: Run flake8
         run: flake8 --verbose .
+
+      - name: Install isort
+        run: pip install isort
+
+      - name: Run isort
+        run: isort --check --diff .
