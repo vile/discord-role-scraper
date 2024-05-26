@@ -17,10 +17,10 @@ A simple Python script used to scrape Discord guild info and roles.
 4. Poetry - [Install Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) (preferrably with [pipx](https://github.com/pypa/pipx))
    1. Check if you have Poetry installed with `poetry --version`
 
-### Additional Requirements
+### Build Requirements
 
 1. PyInstaller - [Install PyInstaller](https://pyinstaller.org/en/stable/) (preferrably with [pipx](https://github.com/pypa/pipx))
-   1.  Check if you have Poetry installed with `pyinstaller --version`
+   1.  Check if you have PyInstaller installed with `pyinstaller --version`
    2.  PyInstaller is platform dependent, if you want to build .exe files, you must build on Windows
 
 ## Usage (Linux)
@@ -42,7 +42,9 @@ After starting the script, follow the prompts given to input your token and serv
 ### Quick Start (exe)
 
 Download the latest `windows-release.zip` file from the [releases tab](https://github.com/vile/discord-role-scraper/releases).
-Then, unzip with your choice of zip tool (WinRAR, 7zip, NanaZip, etc.), and double click `DiscordRoleScraper.exe`.
+Then, unzip with your choice of zip tool (WinRAR, 7zip, NanaZip, etc.), and double click `DiscordRoleScraper.exe`. 
+
+The releases includes the most up to date build and default `config.toml` file.
 
 ### Running with Python
 
@@ -55,13 +57,18 @@ Download the latest version of this repo via HTTPS or clone with git:
 <img><img src="./images/1-download-zip-via-https.jpg">
 
 </details>
-</br>
 
 **Or clone:**
 
 ```bash
 git clone https://github.com/vile/discord-role-scraper.git
 cd discord-role-scraper
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
 
 Then, run the script with Python in CMD/Powershell/Terminal:
@@ -72,13 +79,14 @@ python3 main.py
 
 ### Build Exe from Source Script
 
-Ensure you have [PyInstaller]((https://pyinstaller.org/en/stable/)) installed (see [addtional requirements](#additional-requirements)), then build:
+Ensure you have [PyInstaller]((https://pyinstaller.org/en/stable/)) installed (see [build requirements](#build-requirements)), install script dependencies, then build:
 
 ```bash
+pip install -r requirements.txt
 pyinstaller main.py --onefile --name DiscordRoleScraper
 ```
 
-The exe file will end up in a new folder called `dist/`, move the file into the root directory of the project (where config.toml is).
+The exe file will be export to a new folder called `dist/`, move the file into the root directory of the project (where config.toml is).
 
 ### Interacting with the script
 
@@ -94,7 +102,7 @@ The `config.toml` file contains all of the editable settings for this script. An
 
 | Name           | type   | Default Value | Description                                   |
 | -------------- | ------ | ------------- | --------------------------------------------- |
-| EXPORT_RESULTS | `bool` | `True`        | Whether or not to export txt files of scrapes |
+| export_results | `bool` | `true`        | Whether or not to export txt files of scrapes |
 
 </details>
 
@@ -104,30 +112,30 @@ The `config.toml` file contains all of the editable settings for this script. An
 
 | Name              | type   | Default Value | Description                               |
 | ----------------- | ------ | ------------- | ----------------------------------------- |
-| SCRAPE_GUILD_INFO | `bool` | `True`        | Whether or not to scrape the guild's info |
+| scrape_guild_info | `bool` | `true`        | Whether or not to scrape the guild's info |
 
 
 | Name                 | Default Value |
 | -------------------- | ------------- |
-| id                   | `True`        |
-| name                 | `True`        |
-| icon                 | `False`       |
-| description          | `True`        |
-| home_header          | `False`       |
-| splash               | `False`       |
-| discovery_splash     | `False`       |
-| features             | `False`       |
-| banner               | `False`       |
-| owner_id             | `True`        |
-| application_id       | `False`       |
-| region               | `True`        |
-| afk_channel_id       | `False`       |
-| afk_timeout          | `False`       |
-| system_channel_id    | `False`       |
-| system_channel_flags | `False`       |
-| widget_enabled       | `False`       |
-| widget_channel_id    | `False`       |
-| verification_level   | `True`        |
+| id                   | `true`        |
+| name                 | `true`        |
+| icon                 | `false`       |
+| description          | `true`        |
+| home_header          | `false`       |
+| splash               | `false`       |
+| discovery_splash     | `false`       |
+| features             | `false`       |
+| banner               | `false`       |
+| owner_id             | `true`        |
+| application_id       | `false`       |
+| region               | `true`        |
+| afk_channel_id       | `false`       |
+| afk_timeout          | `false`       |
+| system_channel_id    | `false`       |
+| system_channel_flags | `false`       |
+| widget_enabled       | `false`       |
+| widget_channel_id    | `false`       |
+| verification_level   | `true`        |
 
 </details>
 
@@ -137,16 +145,16 @@ The `config.toml` file contains all of the editable settings for this script. An
 
 | Name                   | type   | Default Value | Description                                                                             |
 | ---------------------- | ------ | ------------- | --------------------------------------------------------------------------------------- |
-| SCRAPE_PERMISSION_INFO | `bool` | `True`        | Whether or not to scrape the guild's roles and associated permissions and/or properties |
+| scrape_permission_info | `bool` | `true`        | Whether or not to scrape the guild's roles and associated permissions and/or properties |
 
 All values starting with `0x` **can not be changed**, if you wish to not see (disable) a specific permission in your scrapes, comment the line (using a `#`). Changing any of the `0x` values will break calculations associated with checking permissions.
 
 | Name             | Type    | Default Value |
 | ---------------- | ------- | ------------- |
-| name             | `bool`  | `True`        |
-| position         | `bool`  | `True`        |
-| id               | `bool`  | `True`        |
-| mentionable      | `bool`  | `True`        |
+| name             | `bool`  | `true`        |
+| position         | `bool`  | `true`        |
+| id               | `bool`  | `true`        |
+| mentionable      | `bool`  | `true`        |
 | administrator    | bitwise |
 | mention all      | bitwise |
 | manage guild     | bitwise |
@@ -158,7 +166,7 @@ All values starting with `0x` **can not be changed**, if you wish to not see (di
 | ban members      | bitwise |
 | webhooks         | bitwise |
 | app commands     | bitwise |
-| tags             | `bool`  | `True`        |
+| tags             | `bool`  | `true`        |
 
 </details>
 
@@ -181,3 +189,7 @@ It is recommended to use a brand new or alt account.
 
 No, I will not help you with this script (follow the [Linux](#usage-linux) and [Windows](#usage-windows) sections above).
 No, I will not make you any scripts.
+
+### When I build my own exe, it immediately closes or says it can't find a module (e.g. tomli)
+
+Make sure you've installed the script dependencies as well before building. PyInstaller does not automatically download packages/libraries for you, it only looks locally (either global installs or venv).
