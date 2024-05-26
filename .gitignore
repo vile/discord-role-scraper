@@ -161,3 +161,4 @@ cython_debug/
 
 export/
 *_roles.txt
+workflow.secrets
