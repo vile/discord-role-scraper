@@ -9,6 +9,7 @@ jobs:
   test:
     name: Dirty Script Test
     runs-on: ubuntu-latest
+    environment: discord_live_testing
 
     steps:
       - uses: actions/checkout@v4
