@@ -29,7 +29,7 @@ A simple Python script used to scrape Discord guild info and roles.
 ### Dev Requirements
 
 1. Act - [Install Act](https://nektosact.com/installation/index.html#pre-built-artifacts)
-   1. Check if you have Act installed with `act --versiong`
+   1. Check if you have Act installed with `act --version`
    2. Refer to this project's [Makefile](./Makefile) (`sudo-act`) for usage in this repo
    3. Put secrets in workflow.secrets (`mv workflow.secrets.example workflow.secrets`)
 
