@@ -26,6 +26,13 @@ A simple Python script used to scrape Discord guild info and roles.
    1.  Check if you have PyInstaller installed with `pyinstaller --version`
    2.  PyInstaller is platform dependent, if you want to build .exe files, you must build on Windows
 
+### Dev Requirements
+
+1. Act - [Install Act](https://nektosact.com/installation/index.html#pre-built-artifacts)
+   1. Check if you have Act installed with `act --versiong`
+   2. Refer to this project's [Makefile](./Makefile) (`sudo-act`) for usage in this repo
+   3. Put secrets in workflow.secrets (`mv workflow.secrets.example workflow.secrets`)
+
 ## Usage (Linux)
 
 ### Quick Start
@@ -34,6 +41,14 @@ A simple Python script used to scrape Discord guild info and roles.
 git clone https://github.com/vile/discord-role-scraper.git
 cd discord-role-scraper
 make
+```
+
+### Running with CLI Args
+
+See [CLI Args](#cli-args) for more info.
+
+```bash
+poetry run python3 main.py (discord token) (server id) (single run)
 ```
 
 ### Interacting with the script
@@ -90,6 +105,18 @@ pyinstaller main.py --onefile --name DiscordRoleScraper
 ```
 
 The exe file will be export to a new folder called `dist/`, move the file into the root directory of the project (where config.toml is).
+
+### Running with CLI Args
+
+CLI args are supported both running directly with Python and with a built exe. See [CLI Args](#cli-args) for more info.
+
+```bash
+python3 main.py (discord token) (server id) (single run)
+```
+
+```bash
+.\DiscordRoleScraper.exe (discord token) (server id) (single run)
+```
 
 ### Interacting with the script
 
@@ -172,6 +199,47 @@ All values starting with `0x` **can not be changed**, if you wish to not see (di
 | tags             | `bool`  | `true`        |
 
 </details>
+
+## CLI Args
+
+All CLI args are optional, but are sequentially required. 
+
+Meaning:
+   - if you want to pass `server id`, you **must** also pass `discord token`.
+   - if you want to pass `single run`, you **must** also pass `server id` and `discord token`.
+
+Supported args:
+   - `discord token` (full, unquoted auth token string)
+   - `server id` (16 to 19 digit numeric server id)
+   - `single run` (true/false, whether or not to immediately exit after the first scrape completes)
+     - Automatically defaults to false
+
+<details>
+<summary>Arg types and defaults</summary>
+
+All CLI args are unquoted.
+
+| Arg             | Type   | Default Value |
+| --------------- | ------ | ------------- |
+| `discord token` | string | None          |
+| `server id`     | int    | 0             |
+| `single run`    | bool   | `false`       |
+
+</details>
+
+### Examples
+
+```bash
+python3 main.py DISCORD.TOKEN.HERE 
+```
+
+```bash
+python3 main.py DISCORD.TOKEN.HERE SERVER_ID
+```
+
+```bash
+python3 main.py DISCORD.TOKEN.HERE SERVER_ID true
+```
 
 ## FAQ
 
