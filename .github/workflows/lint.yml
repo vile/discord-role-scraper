@@ -1,11 +1,18 @@
 name: Lint
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.py'
+  pull_request:
+    paths:
+      - '**.py'
 
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
 
