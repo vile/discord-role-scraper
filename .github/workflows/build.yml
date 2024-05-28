@@ -29,12 +29,13 @@ jobs:
         run: pyinstaller main.py --onefile --name DiscordRoleScraper
 
       - name: Test Build
+        shell: pwsh
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
         timeout-minutes: 2
         run: |
-          .\dist\DiscordRoleScraper.exe "$DISCORD_TOKEN" "$DISCORD_SERVER_ID" true
+          .\dist\DiscordRoleScraper.exe "env:DISCORD_TOKEN" "env:DISCORD_SERVER_ID" true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
