@@ -94,10 +94,13 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
 
         if config["scrape_permission_info"]:
             guild_roles: list = guild.scrape_guild_roles(token, server_id)
-            guild_formatted: str = display.build_permissions_table(
-                guild_roles, config["permissions_to_scrape"]
-            )
-            print(f"{guild_formatted}\n")
+            if len(guild_roles) == 0:
+                print(f"{Fore.RED}[!] There was an error getting guild roles{Fore.RESET}")  # fmt: skip
+            else:
+                guild_formatted: str = display.build_permissions_table(
+                    guild_roles, config["permissions_to_scrape"]
+                )
+                print(f"{guild_formatted}\n")
 
             if config["export_results"]:
                 export.export_scrape_to_file(guild_formatted, server_id, "roles")
@@ -109,11 +112,14 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
                 if type(value) is int
             }
             channels: list = guild.get_channels(token, server_id)
-            channel_overwrites: str = overwrites.parse_permissions(
-                channels,
-                int_only_permissions,
-            )
-            print(f"{channel_overwrites}\n")
+            if "error" in channels:
+                print(f"{Fore.RED}[!] There was an error getting guild channels: {channels['error']}{Fore.RESET}")  # fmt: skip
+            else:
+                channel_overwrites: str = overwrites.parse_permissions(
+                    channels,
+                    int_only_permissions,
+                )
+                print(f"{channel_overwrites}\n")
 
             if config["export_results"]:
                 export.export_scrape_to_file(guild_formatted, server_id, "overwrites")

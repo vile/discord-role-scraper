@@ -52,8 +52,8 @@ def scrape_guild_roles(token: str, server_id: int) -> list:
         if r.status_code == 200:
             return r.json()
         raise Exception(f"Bad HTTP code when scraping guild roles, {r.status_code}")
-    except Exception as error:
-        return {"error": error}
+    except Exception:
+        return []
 
 
 def get_channels(token: str, server_id: int) -> dict:
