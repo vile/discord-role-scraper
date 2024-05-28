@@ -9,6 +9,7 @@ import utils.constant as constant
 import utils.display as display
 import utils.export as export
 import utils.guild as guild
+import utils.overwrites as overwrites
 
 
 def main() -> None:
@@ -96,10 +97,26 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
             guild_formatted: str = display.build_permissions_table(
                 guild_roles, config["permissions_to_scrape"]
             )
-            print(guild_formatted)
+            print(f"{guild_formatted}\n")
 
             if config["export_results"]:
-                export.export_scrape_to_file(guild_formatted, server_id)
+                export.export_scrape_to_file(guild_formatted, server_id, "roles")
+
+        if config["scrape_channel_overwrite_info"]:
+            int_only_permissions: dict[str, int] = {
+                item: value
+                for (item, value) in config["permissions_to_scrape"].items()
+                if type(value) is int
+            }
+            channels: list = guild.get_channels(token, server_id)
+            channel_overwrites: str = overwrites.parse_permissions(
+                channels,
+                int_only_permissions,
+            )
+            print(f"{channel_overwrites}\n")
+
+            if config["export_results"]:
+                export.export_scrape_to_file(guild_formatted, server_id, "overwrites")
 
         if not single_run:
             scrape_again: str = input(f"{Fore.YELLOW}[?] Scrape another server? (y/n): {Fore.RESET}").lower()  # fmt: skip

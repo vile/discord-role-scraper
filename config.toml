@@ -1,6 +1,7 @@
 export_results = true
 scrape_guild_info = true
 scrape_permission_info = true
+scrape_channel_overwrite_info = false
 
 [guild_info_to_scrape]
 id = true

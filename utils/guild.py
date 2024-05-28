@@ -54,3 +54,27 @@ def scrape_guild_roles(token: str, server_id: int) -> list:
         raise Exception(f"Bad HTTP code when scraping guild roles, {r.status_code}")
     except Exception as error:
         return {"error": error}
+
+
+def get_channels(token: str, server_id: int) -> dict:
+    headers: dict = constant.REQUEST_HEADERS.copy()
+    headers["Authorization"] = token
+    cookies: Cookies = account.get_cookies()
+
+    try:
+        r: Response = httpx.get(
+            f"{constant.DISCORD_API_GUILD}/{server_id}/channels",
+            headers=headers,
+            cookies=cookies,
+        )
+
+        json: dict = r.json()
+
+        if r.status_code != 200:
+            raise Exception(
+                f"Bad HTTP code when scraping guild channels, {r.status_code}"
+            )
+    except Exception as error:
+        return {"error": error}
+
+    return json
