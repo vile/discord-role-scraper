@@ -1,10 +1,11 @@
 import string
+from typing import Union
 
 from colorama import Fore
 from tabulate import tabulate
 
 
-def display_guild_info(guild_info: dict, config: dict) -> None:
+def guild_info(guild_info: dict, config: dict) -> None:
     for item, value in guild_info.items():
         if (
             item in config["guild_info_to_scrape"]
@@ -13,14 +14,17 @@ def display_guild_info(guild_info: dict, config: dict) -> None:
             print(f"{Fore.GREEN}{item}{Fore.RESET}: {value}")
 
 
-def display_guild_roles(guild_roles: list, config: dict) -> str:
+def build_permissions_table(
+    guild_roles: list, attributes: dict[str, Union[bool, int]]
+) -> str:
     roles: list = sorted(guild_roles, key=lambda role: role["position"], reverse=True)
-    table_data: list = []
+    table_data: list[str] = []
 
     for role in roles:
-        role_info: list = []
-        for item, value in config["permissions_to_scrape"].items():
-            # Non-permission flags
+        role_info: list[str] = []
+
+        for item, value in attributes.items():
+            # Non-permission flags (tags, mentionable)
             if type(value) is bool and value:
                 if item == "tags":
                     if "tags" in role:
@@ -45,7 +49,7 @@ def display_guild_roles(guild_roles: list, config: dict) -> str:
                     )
                     continue
 
-                # Catch all for non-edge case properties
+                # Catch all for non-edge case properties (name, id, position, etc.)
                 role_info.append(
                     "".join(filter(lambda x: x in string.printable, str(role[item])))
                 )
@@ -62,9 +66,8 @@ def display_guild_roles(guild_roles: list, config: dict) -> str:
 
     tab_data = tabulate(
         table_data,
-        headers=list(
-            key for key, value in config["permissions_to_scrape"].items() if value
-        ),
+        headers=list(key for key, value in attributes.items() if value),
         tablefmt="github",
     )
+
     return tab_data
