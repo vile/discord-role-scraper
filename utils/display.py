@@ -18,7 +18,7 @@ def build_permissions_table(
     guild_roles: list, attributes: dict[str, Union[bool, int]]
 ) -> str:
     roles: list = sorted(guild_roles, key=lambda role: role["position"], reverse=True)
-    table_data: list[str] = []
+    table_data: list[list[str]] = []
 
     for role in roles:
         role_info: list[str] = []
