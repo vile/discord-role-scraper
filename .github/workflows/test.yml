@@ -25,8 +25,9 @@ jobs:
 
       - name: Disable File Exports
         run: |
-          sudo chmod +x .github/change_config_export.sh
-          sudo .github/change_config_export.sh false
+          sudo chmod +x .github/change_config_settings.sh
+          sudo .github/change_config_settings.sh export_results false
+          sudo .github/change_config_settings.sh scrape_channel_overwrite_info true
 
       - name: Test Script Runs with CLI Args
         env:

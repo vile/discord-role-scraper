@@ -7,5 +7,4 @@ function set_config(){
     sudo sed -i "s/^\($1\s*=\s*\).*\$/\1$2/" $CONFIG
 }
 
-export_results=$1
-set_config export_results $export_results # SETS THE NEW VALUE
+set_config $1 $2 # SETS THE NEW VALUE
