@@ -1,4 +1,4 @@
-name: Build Windows Release with PyInstaller
+name: Build, Test, & Publish Windows Release with PyInstaller
 
 on:
   push:
@@ -9,6 +9,7 @@ jobs:
   build:
     name: Build Windows Release
     runs-on: windows-latest
+    environment: discord_live_testing
     if: ${{ !github.event.act }}
 
     steps:
@@ -26,6 +27,14 @@ jobs:
 
       - name: Build with PyInstaller
         run: pyinstaller main.py --onefile --name DiscordRoleScraper
+
+      - name: Test Build
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+        timeout-minutes: 2
+        run: |
+          .\dist\DiscordRoleScraper.exe "$DISCORD_TOKEN" "$DISCORD_SERVER_ID" true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
