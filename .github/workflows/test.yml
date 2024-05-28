@@ -23,7 +23,7 @@ jobs:
       - name: Install Script Dependencies
         run: pip install -r requirements.txt
 
-      - name: Disable File Exports
+      - name: Change Config File Settings
         run: |
           sudo chmod +x .github/change_config_settings.sh
           sudo .github/change_config_settings.sh export_results false
