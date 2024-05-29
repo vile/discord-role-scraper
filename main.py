@@ -102,8 +102,8 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
                 )
                 print(f"{guild_formatted}\n")
 
-            if config["export_results"]:
-                export.export_scrape_to_file(guild_formatted, server_id, "roles")
+                if config["export_results"]:
+                    export.export_scrape_to_file(guild_formatted, server_id, "roles")
 
         if config["scrape_channel_overwrite_info"]:
             int_only_permissions: dict[str, int] = {
@@ -121,8 +121,10 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
                 )
                 print(f"{channel_overwrites}\n")
 
-            if config["export_results"]:
-                export.export_scrape_to_file(guild_formatted, server_id, "overwrites")
+                if config["export_results"]:
+                    export.export_scrape_to_file(
+                        channel_overwrites, server_id, "overwrites"
+                    )
 
         if not single_run:
             scrape_again: str = input(f"{Fore.YELLOW}[?] Scrape another server? (y/n): {Fore.RESET}").lower()  # fmt: skip
