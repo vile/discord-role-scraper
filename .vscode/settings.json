@@ -3,4 +3,27 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
     },
+    "markdownlint.config": {
+        "default": true,
+        "MD003": {
+            "style": "atx",
+        },
+        "MD007": {
+            "indent": 3,
+            "start_indent": 3,
+            "start_indented": true,
+        },
+        "MD024": {
+            "siblings_only": true,
+        },
+        "MD033": {
+            "allowed_elements": [
+                "details",
+                "summary",
+                "br",
+                "img",
+            ]
+        },
+        "no-hard-tabs": false,
+    },
 }
