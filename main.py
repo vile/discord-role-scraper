@@ -129,7 +129,7 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
                     )
 
         if not single_run:
-            print(f"{Fore.YELLOW}[?] Scrape another server? (y/n):", end="")
+            print(f"{Fore.YELLOW}[?] Scrape another server? (y/n): ", end="")
             scrape_again: str = input().lower()  # fmt: skip
             if "y" in scrape_again:
                 server_id = 0
