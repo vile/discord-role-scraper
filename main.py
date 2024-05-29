@@ -1,8 +1,9 @@
+import os
 import sys
 from typing import Callable, Union
 
 import tomli
-from colorama import Fore
+from colorama import Fore, init
 
 import utils.account as account
 import utils.constant as constant
@@ -13,6 +14,10 @@ import utils.overwrites as overwrites
 
 
 def main() -> None:
+    init(
+        convert=True if os.name == "nt" else False,
+        autoreset=True,
+    )
     config: dict = load_config()
     args: dict[str, str] = parse_argv()
     scraper(args)(config)
@@ -58,7 +63,7 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
         single_run = args["single_run"]
 
     def run(config: dict) -> None:
-        print(f"{Fore.RED}Discord Role Scraper v{constant.VERSION_NUMBER} | {constant.SCRIPT_AUTHOR}{Fore.RESET}\n")  # fmt: skip
+        print(f"{Fore.RED}Discord Role Scraper v{constant.VERSION_NUMBER} | {constant.SCRIPT_AUTHOR}\n")  # fmt: skip
 
         nonlocal token
         nonlocal server_id
@@ -66,21 +71,18 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
 
         while True:
             if token == "":
-                token = input(f"{Fore.RED}Token: {Fore.RESET}").strip("'\"")
+                print(f"{Fore.RED}Token: ", end="")
+                token = input().strip("'\"")
             if not account.check_token_is_valid(token):
-                print(f"{Fore.RED}[!] Your token seems to be invalid, make sure you are copying your FULL token without changing it and that your account is not terminated or locked{Fore.RESET}")  # fmt: skip
+                print(f"{Fore.RED}[!] Your token seems to be invalid, make sure you are copying your FULL token without changing it and that your account is not terminated or locked")  # fmt: skip
+                token = ""
                 continue
 
             if server_id == 0:
-                server_id = (
-                    int(_input)
-                    if (
-                        _input := input(f"{Fore.RED}Server ID: {Fore.RESET}")
-                    ).isnumeric()
-                    else 0
-                )
+                print(f"{Fore.RED}Server ID: ", end="")
+                server_id = int(_input) if (_input := input()).isnumeric() else 0
             if not guild.check_server_id_is_valid(server_id):
-                print(f"{Fore.RED}[!] Your server ID seems to be invalid, make sure you are copying the FULL numerical server ID without changing it{Fore.RESET}")  # fmt: skip
+                print(f"{Fore.RED}[!] Your server ID seems to be invalid, make sure you are copying the FULL numerical server ID without changing it")  # fmt: skip
                 server_id = 0
                 continue
             break
@@ -88,14 +90,14 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
         if config["scrape_permission_info"]:
             guild_info: dict = guild.scrape_guild_info(token, server_id)
             if "error" in guild_info:
-                print(f"{Fore.RED}[!] There was an error getting guild info: {guild_info['error']}{Fore.RESET}")  # fmt: skip
+                print(f"{Fore.RED}[!] There was an error getting guild info: {guild_info['error']}")  # fmt: skip
             else:
                 display.guild_info(guild_info, config)
 
         if config["scrape_permission_info"]:
             guild_roles: list = guild.scrape_guild_roles(token, server_id)
             if len(guild_roles) == 0:
-                print(f"{Fore.RED}[!] There was an error getting guild roles{Fore.RESET}")  # fmt: skip
+                print(f"{Fore.RED}[!] There was an error getting guild roles")  # fmt: skip
             else:
                 guild_formatted: str = display.build_permissions_table(
                     guild_roles, config["permissions_to_scrape"]
@@ -113,7 +115,7 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
             }
             channels: list = guild.get_channels(token, server_id)
             if "error" in channels:
-                print(f"{Fore.RED}[!] There was an error getting guild channels: {channels['error']}{Fore.RESET}")  # fmt: skip
+                print(f"{Fore.RED}[!] There was an error getting guild channels: {channels['error']}")  # fmt: skip
             else:
                 channel_overwrites: str = overwrites.parse_permissions(
                     channels,
@@ -127,7 +129,8 @@ def scraper(args: dict[str, Union[str, int]]) -> Callable[[dict], None]:
                     )
 
         if not single_run:
-            scrape_again: str = input(f"{Fore.YELLOW}[?] Scrape another server? (y/n): {Fore.RESET}").lower()  # fmt: skip
+            print(f"{Fore.YELLOW}[?] Scrape another server? (y/n):", end="")
+            scrape_again: str = input().lower()  # fmt: skip
             if "y" in scrape_again:
                 server_id = 0
                 run(config)
