@@ -1,0 +1,4 @@
+| Name                    |          Channel ID |   Channel Type | Overwrite   |       User/Role ID | administrator   | mention all   | manage guild   | manage roles   | manage channels   | kick members   | ban members   | webhooks   |
+|-------------------------|---------------------|----------------|-------------|--------------------|-----------------|---------------|----------------|----------------|-------------------|----------------|---------------|------------|
+| open-beta-announcements |  503009489486872583 |              5 | Role        | 378256373701410817 | N/A             | Allow         | N/A            | N/A            | N/A               | N/A            | N/A           | N/A        |
+| community-servers       | 1204490664637890580 |             15 | Role        | 189511567539306508 | N/A             | Deny          | N/A            | N/A            | N/A               | N/A            | N/A           | N/A        |
