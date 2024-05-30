@@ -1,4 +1,4 @@
-.PHONY: all deps start build clean remove-exports remove-env remove-build-artifacts remove-dist remove-pycache sudo-act
+.PHONY: all deps start build _build clean remove-exports remove-env remove-build-artifacts remove-dist remove-pycache sudo-act
 
 all: clean deps start
 
