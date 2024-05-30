@@ -1,6 +1,6 @@
-.PHONY: all deps start clean remove-exports remove-env remove-pycache sudo-act
+.PHONY: all deps start build clean remove-exports remove-env remove-build-artifacts remove-dist remove-pycache sudo-act
 
-all: deps start
+all: clean deps start
 
 deps :
 	poetry config virtualenvs.in-project true
@@ -8,13 +8,27 @@ deps :
 
 start :; poetry run python3 main.py
 
+### Build
+
+# This is only intended to be used for Linux builds with Poetry (venv)
+build: remove-build-artifacts remove-dist _build
+
+_build :
+	PYTHON_VERSION=$$(cat .python-version); \
+	SITE_PACKAGES=".venv/lib/python$$PYTHON_VERSION/site-packages"; \
+	pyinstaller main.py --onefile --name DiscordRoleScraper --paths $$SITE_PACKAGES
+
 ### Clean
 
-clean: remove-exports remove-venv remove-pycache
+clean: remove-exports remove-venv remove-pycache remove-build-artifacts remove-dist
 
 remove-exports :; rm -rf export/*
 
 remove-venv :; rm -rf .venv
+
+remove-build-artifacts :; rm -rf build
+
+remove-dist :; rm -rf dist
 
 # https://stackoverflow.com/a/41386937
 # Will remove pycache files under .venv/ as well
@@ -28,4 +42,8 @@ remove-pycache :; find . -regex '^.*\(__pycache__\|\.py[co]\)$$' -delete
 # 	- make sudo-act ACTION=push FLAGS="--secret-file workflow.secrets"
 # Depending on your Docker installation, sometimes Act 
 # doesnt have permission to interact with your docker daemon
-sudo-act :; sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS)
+sudo-act :
+	mkdir -p tmp/artifacts
+	sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS) $(ARTIFACTS_PATH) \
+	--artifact-server-path /tmp/artifacts
+	rm -rf tmp
