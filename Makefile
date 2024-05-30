@@ -44,6 +44,6 @@ remove-pycache :; find . -regex '^.*\(__pycache__\|\.py[co]\)$$' -delete
 # doesnt have permission to interact with your docker daemon
 sudo-act :
 	mkdir -p tmp/artifacts
-	sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS) $(ARTIFACTS_PATH) \
+	sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS) \
 	--artifact-server-path /tmp/artifacts
 	rm -rf tmp
