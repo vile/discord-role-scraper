@@ -30,9 +30,10 @@ A Python script used to scrape Discord guild info, roles, and channel overwrites
 
 1. Act - [Install Act](https://nektosact.com/installation/index.html#pre-built-artifacts)
    1. Check if you have Act installed with `act --version`
-   2. Refer to this project's [Makefile](./Makefile) (`sudo-act`) for usage
+   2. Refer to this project's [Makefile](./Makefile) (`sudo-act`) for usage (e.g., `make sudo-act ACTION=push`)
    3. Put secrets in workflow.secrets (`mv workflow.secrets.example workflow.secrets`)
 2. Markdownlint - [Install Markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+3. Poetry Export Plugni - [Install Plugin](https://github.com/python-poetry/poetry-plugin-export?tab=readme-ov-file#installation) (preferrably with [pipx](https://github.com/pypa/pipx) inject)
 
 ## Usage (Linux)
 

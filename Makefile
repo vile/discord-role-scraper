@@ -6,7 +6,7 @@ deps :
 	poetry config virtualenvs.in-project true
 	poetry install --no-root
 
-start :; poetry run python3 main.py
+start :; poetry run python3 main.py $(ARGS)
 
 ### Build
 
@@ -44,6 +44,6 @@ remove-pycache :; find . -regex '^.*\(__pycache__\|\.py[co]\)$$' -delete
 # doesnt have permission to interact with your docker daemon
 sudo-act :
 	mkdir -p tmp/artifacts
-	sudo env "PATH=$$PATH" act $(ACTION) $(FLAGS) \
+	sudo env "PATH=$$PATH" act $(ACTION) --secret-file workflow.secrets $(FLAGS) \
 	--artifact-server-path /tmp/artifacts
 	rm -rf tmp
